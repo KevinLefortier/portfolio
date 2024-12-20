@@ -1,0 +1,48 @@
+- domaine: bureautique
+  competences:
+    - nom: word
+      niveau: ★★★★✰
+    - nom: excel
+      niveau: ★★★✭✰
+    - nom: powerpoint
+      niveau: ★★★★✰
+- domaine: développement
+  competences:
+    - nom: html
+      niveau: ★✭✰✰✰
+    - nom: css
+      niveau: ★★✰✰✰
+    - nom: php
+      niveau: ✭✰✰✰✰
+    - nom: yaml
+      niveau: ✭✰✰✰✰
+- domaine: réseau
+  competences:
+    - nom: DHCP 
+      niveau: ★★★✭✰
+    - nom: 
+- domaine: langue
+  competences:
+    - nom: français
+      niveau: ★★★★✰
+    - nom: anglais
+      niveau: ★★✭✰✰
+    - nom: allemand
+      niveau: ✭✰✰✰✰
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+legende: ✰=0 point           ✭=0.5 point           ★=1 point
