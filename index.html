@@ -1114,6 +1114,217 @@ footer a:hover { color: var(--red-bright); }
 }
 
 /* ============================================================
+                VEILLE INFORMATIQUE SECTION
+   ============================================================ */
+#veille {
+  position: relative;
+}
+#veille::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -48px;
+  width: 300px; height: 100%;
+  background: linear-gradient(to left, rgba(192,57,43,0.03), transparent);
+  pointer-events: none;
+}
+ 
+/* Filter bar */
+.veille-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.veille-filter {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  background: transparent;
+  cursor: none;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.veille-filter.active,
+.veille-filter:hover {
+  color: var(--white);
+  border-color: var(--red-bright);
+  background: rgba(192,57,43,0.08);
+}
+ 
+/* Feed grid */
+.veille-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+ 
+/* Feed card */
+.veille-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+.veille-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--red-bright), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.veille-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-bright);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 24px rgba(192,57,43,0.07);
+}
+.veille-card:hover::before { transform: scaleX(1); }
+ 
+/* Card hidden state for filter */
+.veille-card.hidden {
+  display: none;
+}
+ 
+.veille-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+ 
+.veille-badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+.veille-badge.security   { color: #e74c3c; border-color: rgba(231,76,60,0.4); background: rgba(231,76,60,0.06); }
+.veille-badge.frontend   { color: #3498db; border-color: rgba(52,152,219,0.4); background: rgba(52,152,219,0.06); }
+.veille-badge.backend    { color: #2ecc71; border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.06); }
+.veille-badge.ai         { color: #9b59b6; border-color: rgba(155,89,182,0.4); background: rgba(155,89,182,0.06); }
+.veille-badge.devops     { color: #f39c12; border-color: rgba(243,156,18,0.4); background: rgba(243,156,18,0.06); }
+.veille-badge.web3       { color: #1abc9c; border-color: rgba(26,188,156,0.4); background: rgba(26,188,156,0.06); }
+ 
+.veille-date {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--grey);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+ 
+.veille-title {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 500;
+  line-height: 1.5;
+  transition: color var(--transition);
+}
+.veille-card:hover .veille-title { color: var(--red-bright); }
+ 
+.veille-source {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--grey);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.veille-source::before {
+  content: '//';
+  color: var(--red-dim);
+}
+ 
+.veille-desc {
+  font-size: 12px;
+  color: var(--grey);
+  line-height: 1.7;
+  font-weight: 300;
+  flex: 1;
+}
+ 
+.veille-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.veille-tag {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--grey);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 3px 8px;
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.02);
+}
+ 
+.veille-link {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey);
+  text-decoration: none;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--transition);
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.veille-link::before {
+  content: '→';
+  color: var(--red-bright);
+  transition: transform var(--transition);
+}
+.veille-link:hover { color: var(--white); }
+.veille-link:hover::before { transform: translateX(4px); }
+ 
+/* Terminal-style intro block */
+.veille-terminal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--grey);
+  line-height: 2;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.veille-terminal::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 10px; left: 16px;
+  font-size: 8px;
+  color: var(--red-dim);
+  letter-spacing: 4px;
+}
+.veille-terminal-body { margin-top: 20px; }
+.veille-terminal .cmd { color: var(--red-bright); }
+.veille-terminal .out { color: var(--grey-light); }
+.veille-terminal .comment { color: var(--grey); opacity: 0.5; }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
@@ -1127,6 +1338,8 @@ footer a:hover { color: var(--red-bright); }
   .project-featured { grid-template-columns: 1fr; }
   .project-featured .project-img { display: none; }
   footer { flex-direction: column; gap: 12px; text-align: center; }
+  .veille-grid { grid-template-columns: 1fr; }
+  #veille { padding: 80px 24px; }
 }
 
 /* ============================================================
@@ -1253,9 +1466,83 @@ const DATA = {
     { label: "SKILLS", href: "#skills" },
     { label: "PROJECTS", href: "#projects" },
     { label: "EXPERIENCE", href: "#experience" },
+    { label: "VEILLE", href: "#veille" },
     { label: "CONTACT", href: "#contact" }
-  ]
+  ],
+
+  veille: {
+    filters: ["ALL", "AI", "SECURITY", "FRONTEND", "BACKEND", "DEVOPS", "WEB3"],
+    items: [
+      {
+        id: "VL-001",
+        category: "ai",
+        badge: "AI",
+        date: "2026-05-04",
+        title: "Microsoft retire Agent 365 de sa phase de prévisualisation, l'IA fantôme devenant une menace pour les entreprises.",
+        source: "VentureBeat",
+        desc: "Le produit, annoncé pour la première fois lors de la conférence Ignite de Microsoft en novembre, se positionne comme un plan de contrôle unifié...",
+        tags: ["LLM", "Anthropic", "Code Generation"],
+        url: "https://venturebeat.com/technology/microsoft-takes-agent-365-out-of-preview-as-shadow-ai-becomes-an-enterprise-threat"
+      },
+      {
+        id: "VL-002",
+        category: "ai",
+        badge: "AI",
+        date: "2026-04-29",
+        title: "Cursor Introduces a TypeScript SDK for Building Programmatic Coding Agents With Sandboxed Cloud VMs, Subagents, Hooks, and Token-Based Pricing",
+        source: "marktechpost",
+        desc: "Cursor, the AI-powered code editor, is opening up the core technology behind its coding agents to developers everywhere. The Cursor team announced the public beta of the Cursor SDK...",
+        tags: ["CVE", "SSH", "Linux", "Patch"],
+        url: "https://www.marktechpost.com/2026/04/29/cursor-introduces-a-typescript-sdk-for-building-programmatic-coding-agents-with-sandboxed-cloud-vms-subagents-hooks-and-token-based-pricing"
+      },
+      {
+        id: "VL-003",
+        category: "ai",
+        badge: "AI",
+        date: "2026-05-1",
+        title: "Cyber-Insecurity in the AI Era",
+        source: "MIT Technology Review",
+        desc: "Cybersecurity was already under strain before AI entered the stack. Now, as AI expands the attack surface and adds new complexity, the limits of legacy approaches are becoming harder to ignore. This session from MIT Technology Review's EmTech AI conference explores why security must be rethought with AI at its core, not layered on after the fact.",
+        tags: ["React", "Compiler", "Performance"],
+        url: "https://www.technologyreview.com/2026/05/01/1136779/cyber-insecurity-in-the-ai-era"
+      },
+      {
+        id: "VL-004",
+        category: "security",
+        badge: "SECURITY",
+        date: "2026-04-28",
+        title: "Researchers Discover Critical GitHub CVE-2026-3854 RCE Flaw Exploitable via Single Git Push",
+        source: "The Hacker News",
+        desc: "Cybersecurity researchers have disclosed details of a critical security vulnerability impacting GitHub.com and GitHub Enterprise Server that could allow an authenticated user to obtain remote code execution with a single 'git push' command.",
+        tags: ["GitHub", "CVE-2026-3854", "RCE", "Security"],
+        url: "https://thehackernews.com/2026/04/researchers-discover-critical-github.html"
+      },
+      {
+        id: "VL-005",
+        category: "ai",
+        badge: "AI",
+        date: "2026-05-04",
+        title: "Anthropic lance la version bêta publique de Claude Security, un outil de détection des vulnérabilités du code basé sur l'IA et s'appuyant sur le modèle Opus 4.7",
+        source: "Developpez.com",
+        desc: "Anthropic a lancé la version bêta publique de Claude Security pour les clients de Claude Enterprise, intégrant ainsi la détection des vulnérabilités basée sur l'IA directement dans les bases de code de production sans nécessiter d'outils personnalisés ni d'intégrations d'API.",
+        tags: ["Bun", "Node.js", "Runtime", "Performance"],
+        url: "https://intelligence-artificielle.developpez.com/actu/382834/Anthropic-lance-la-version-beta-publique-de-Claude-Security-un-outil-de-detection-des-vulnerabilites-du-code-base-sur-l-IA-et-s-appuyant-sur-le-modele-Opus-4-7"
+      },
+      {
+        id: "VL-006",
+        category: "ai",
+        badge: "AI",
+        date: "2026-04-30",
+        title: "OpenAI mise tout sur l’IA agent avec GPT-5.5 pour éteindre l’incendie",
+        source: "Intelligence-Artificielle.com",
+        desc: "Plus qu’une simple mise à jour, GPT-5.5 marque le passage des chatbots passifs aux agents autonomes capables de piloter un ordinateur pour regagner la confiance des pros. Baptisé « Spud », le modèle GPT-5.5 d’OpenAI arrive seulement six semaines après la version 5.4. L’objectif est double : stopper la fuite des utilisateurs suite au contrat avec le Pentagone et surpasser Claude Opus 4.7. Le modèle est loin du simple chatbot, c’est un véritable agent capable d’agir.",
+        tags: ["AI Agents", "Software Engineering", "Future of Work"],
+        url: "intelligence-artificielle.com/openai-mise-tout-sur-lia-agent-avec-gpt-5-5-pour-eteindre-lincendie"
+      }
+    ]
+  }
 };
+
 </script>
 
 <div id="cursor"></div>
@@ -1373,6 +1660,24 @@ const DATA = {
   <div class="timeline" id="timeline"></div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ============ VEILLE INFORMATIQUE ============ -->
+<section id="veille">
+  <div class="section-header reveal">
+    <span class="section-number">05</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">VEILLE <span>TECH</span></h2>
+    <div class="section-line-end"></div>
+  </div>
+ 
+  <!-- Filters -->
+  <div class="veille-filters reveal reveal-delay-1" id="veille-filters"></div>
+ 
+  <!-- Cards -->
+  <div class="veille-grid reveal reveal-delay-2" id="veille-grid"></div>
+</section>
+ 
 <div class="divider"></div>
 
 <!-- ============ CONTACT ============ -->
@@ -1502,6 +1807,45 @@ const DATA = {
         <p class="timeline-desc">${exp.desc}</p>
       </div>`;
     timeline.appendChild(div);
+  });
+ 
+  /*const vFiltersEl = document.getElementById('veille-filters');
+  DATA.veille.filters.forEach(f => {
+    const btn = document.createElement('button');
+    btn.className = 'veille-filter' + (f === 'ALL' ? ' active' : '');
+    btn.textContent = f;
+    btn.dataset.filter = f;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.veille-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.veille-card').forEach(card => {
+        if (f === 'ALL' || card.dataset.category === f.toLowerCase()) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+    vFiltersEl.appendChild(btn);
+  });*/
+ 
+  const vGrid = document.getElementById('veille-grid');
+  DATA.veille.items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = `veille-card reveal reveal-delay-${(i % 3) + 1}`;
+    div.dataset.category = item.category;
+    const tagsHtml = item.tags.map(t => `<span class="veille-tag">${t}</span>`).join('');
+    const dateFormatted = new Date(item.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
+    div.innerHTML = `
+      <div class="veille-card-top">
+        <span class="veille-badge ${item.category}">${item.badge}</span>
+        <span class="veille-date">${dateFormatted}</span>
+      </div>
+      <div class="veille-title">${item.title}</div>
+      <div class="veille-source">${item.source}</div>
+      <p class="veille-desc">${item.desc}</p>
+      <a href="${item.url}" class="veille-link" target="_blank">Lire l'article</a>`;
+    vGrid.appendChild(div);
   });
 
   document.getElementById('contact-headline').textContent = DATA.contact.headline;
